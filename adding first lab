@@ -1,0 +1,85 @@
+package ua.lviv.iot.algo.part1.lab1;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class Camera {
+    private String model = "Canon";
+    private String resolution = "1920х1080";
+    private double zoom = 5;
+    private String memoryCardType = "Sd";
+    private int photosCount = 1000;
+
+    private static Camera instance;
+
+    public static Camera getInstance() {
+        if (instance == null) {
+            instance = new Camera();
+        }
+        return instance;
+    }
+
+    public void resetZoom() {
+        zoom = 1;
+        if (zoom == 1) {
+            System.out.println("Zoom level has been reset to 1.");
+        } else {
+            System.out.println("Failed to reset zoom level.");
+        }
+    }
+
+    public void savePhoto(int value) {
+        this.photosCount += value;
+    }
+
+    public void eraseMemory() {
+        boolean memoryCleared = true;
+
+        if (memoryCleared) {
+            System.out.println("All photos have been erased from memory.");
+        } else {
+            System.out.println("Failed to erase photos from memory.");
+        }
+    }
+
+    public void changeSettings(String resolution, double zoom) {
+        if (resolution != null && !resolution.isEmpty()) {
+            System.out.println("Resolution successfully changed to " + resolution);
+            this.resolution = resolution;
+        } else {
+            System.out.println("Failed to change resolution!");
+        }
+        if (zoom >= 1 && zoom <= 5) {
+            this.zoom = zoom;
+            System.out.println("Optical zoom successfully changed to " + zoom);
+        } else {
+            System.out.println("Failed to change optical zoom!");
+        }
+
+    }
+
+    public static void print(Camera[] array) {
+        for (Camera cameras : array) {
+            System.out.println(cameras);
+        }
+    }
+
+    public static void main(String... Args) {
+        Camera[] cameras = new Camera[4];
+
+        cameras[0] = new Camera();
+        cameras[1] = new Camera("Samsung", "1024x768", 5, "Microsd", 800);
+        cameras[2] = getInstance();
+        cameras[3] = getInstance();
+
+            System.out.println(cameras);
+        }
+    }
