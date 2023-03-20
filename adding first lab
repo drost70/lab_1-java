@@ -1,20 +1,17 @@
 package ua.lviv.iot.algo.part1.lab1;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@RequiredArgsConstructor
 public class Camera {
     private String model = "Canon";
     private String resolution = "1920х1080";
-    private double zoom = 5;
+    protected double zoom = 5;
+
     private String memoryCardType = "Sd";
     private int photosCount = 1000;
 
@@ -28,6 +25,7 @@ public class Camera {
     }
 
     public void resetZoom() {
+
         zoom = 1;
         if (zoom == 1) {
             System.out.println("Zoom level has been reset to 1.");
@@ -40,8 +38,8 @@ public class Camera {
         this.photosCount += value;
     }
 
-    public void eraseMemory() {
-        boolean memoryCleared = true;
+    public void eraseMemory(boolean memoryCleared) {
+
 
         if (memoryCleared) {
             System.out.println("All photos have been erased from memory.");
@@ -66,12 +64,6 @@ public class Camera {
 
     }
 
-    public static void print(Camera[] array) {
-        for (Camera cameras : array) {
-            System.out.println(cameras);
-        }
-    }
-
     public static void main(String... Args) {
         Camera[] cameras = new Camera[4];
 
@@ -79,7 +71,9 @@ public class Camera {
         cameras[1] = new Camera("Samsung", "1024x768", 5, "Microsd", 800);
         cameras[2] = getInstance();
         cameras[3] = getInstance();
+        for (Camera camera : cameras) {
 
-            System.out.println(cameras);
+            System.out.println(camera.toString());
+        }
         }
     }
